@@ -26,8 +26,30 @@ services:
     image: prom/prometheus
     volumes:
       - prometheus_data:/prometheus
+    networks:
+      - obs_stack
+
+  tempo:
+    image: grafana/tempo:latest
+    command: [ "-config.file=/etc/tempo.yaml" ]
+    volumes:
+      - ./configs/tempo/tempo-config.yaml:/etc/tempo.yaml
+      - tempo_data:/var/tempo
+    networks:
+      - obs_stack
+
+  otel:
+    image: otel/opentelemetry-collector
+    command: [ "--config=file:/etc/otel.yaml" ]
+    ports:
+      - "4317:4317"
+    volumes:
+      - ./configs/otel/otel-config.yaml:/etc/otel.yaml
+    networks:
+      - obs_stack
 
 volumes:
   grafana_data:
   loki_data:
   prometheus_data:
+  tempo_data:
