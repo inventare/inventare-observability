@@ -24,6 +24,7 @@ services:
 
   prometheus:
     image: prom/prometheus
+    command: [ "--web.enable-remote-write-receiver" ]
     volumes:
       - prometheus_data:/prometheus
     networks:
