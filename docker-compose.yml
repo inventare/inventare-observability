@@ -24,8 +24,9 @@ services:
 
   prometheus:
     image: prom/prometheus
-    command: [ "--web.enable-remote-write-receiver" ]
+    command: [ "--web.enable-remote-write-receiver", "--config.file=/etc/prometheus.yaml" ]
     volumes:
+      - ./configs/prometheus/prometheus-config.yaml:/etc/prometheus.yaml
       - prometheus_data:/prometheus
     networks:
       - obs_stack
