@@ -2,6 +2,9 @@ receivers:
   otlp:
     protocols:
       grpc:
+        tls:
+          cert_file: /server.crt
+          key_file: /server.key
       http:
   prometheus/collector:
     config:

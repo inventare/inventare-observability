@@ -47,6 +47,8 @@ services:
       - "4317:4317"
       - "4318:4318"
     volumes:
+      - ./tsl_certificates/server.crt:/server.crt
+      - ./tsl_certificates/server.key:/server.key
       - ./configs/otel/otel-config.yaml:/etc/otel.yaml
     networks:
       - obs_stack
