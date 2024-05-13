@@ -19,6 +19,8 @@ exporters:
     add_metric_suffixes: true
   otlphttp:
     endpoint: http://tempo:4418
+    tls:
+      insecure: true
   loki:
     endpoint: http://loki:3100/loki/api/v1/push
   logging/metrics:
