@@ -12,6 +12,11 @@ services:
       - loki_data:/loki
     networks:
       - obs_stack
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: '0.2GB'
 
   grafana:
     image: grafana/grafana:latest
@@ -21,6 +26,10 @@ services:
       - "3000:3000"
     networks:
       - obs_stack
+    resources:
+      limits:
+        cpus: '0.2'
+        memory: '0.1GB'
 
   prometheus:
     image: prom/prometheus
@@ -30,6 +39,10 @@ services:
       - prometheus_data:/prometheus
     networks:
       - obs_stack
+    resources:
+      limits:
+        cpus: '0.2'
+        memory: '0.2GB'
 
   tempo:
     image: grafana/tempo:latest
@@ -39,6 +52,10 @@ services:
       - tempo_data:/var/tempo
     networks:
       - obs_stack
+    resources:
+      limits:
+        cpus: '0.2'
+        memory: '0.4GB'
 
   otel:
     image: otel/opentelemetry-collector-contrib:latest
@@ -50,6 +67,10 @@ services:
       - ./configs/otel/otel-config.yaml:/etc/otel.yaml
     networks:
       - obs_stack
+    resources:
+      limits:
+        cpus: '0.2'
+        memory: '0.1GB'
 
 volumes:
   grafana_data:
